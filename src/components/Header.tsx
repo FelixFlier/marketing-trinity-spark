@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import WaitlistModal from "./WaitlistModal";
 
 const Header = () => {
   return (
@@ -17,9 +18,20 @@ const Header = () => {
           <a href="#about" className="text-body hover:text-primary transition-colors">About</a>
         </nav>
         
-        <Button className="btn-gradient">
-          Join Waitlist
-        </Button>
+        <div className="flex items-center space-x-3">
+          <Button 
+            variant="ghost"
+            onClick={() => window.location.href = "/auth"}
+            className="text-gray-700 hover:text-gray-900"
+          >
+            Sign In
+          </Button>
+          <WaitlistModal>
+            <Button className="btn-gradient">
+              Join Waitlist
+            </Button>
+          </WaitlistModal>
+        </div>
       </div>
     </header>
   );

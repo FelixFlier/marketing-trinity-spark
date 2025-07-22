@@ -8,6 +8,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { X, CheckCircle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 interface WaitlistModalProps {
   children: React.ReactNode;
@@ -66,14 +67,31 @@ const WaitlistModal = ({ children }: WaitlistModalProps) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    setIsSubmitted(true);
-    toast({
-      title: "Welcome to the waitlist!",
-      description: "We'll notify you when Marketing Intelligence Trinity launches.",
-    });
+    try {
+      const { error } = await supabase
+        .from("waitlist")
+        .insert({
+          email: formData.email,
+          business_type: formData.businessType,
+          marketing_challenge: formData.marketingChallenge,
+          budget_range: formData.budgetRange,
+          priority_features: formData.priorityFeatures
+        });
+
+      if (error) throw error;
+
+      setIsSubmitted(true);
+      toast({
+        title: "Welcome to the waitlist!",
+        description: "We'll notify you when Marketing Intelligence Trinity launches.",
+      });
+    } catch (error: any) {
+      toast({
+        title: "Error",
+        description: error.message || "Failed to join waitlist. Please try again.",
+        variant: "destructive",
+      });
+    }
   };
 
   const resetForm = () => {
