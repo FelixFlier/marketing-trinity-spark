@@ -14,7 +14,122 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      executions: {
+        Row: {
+          cost_usd: number | null
+          created_at: string | null
+          execution_time: number | null
+          id: string
+          input_data: Json | null
+          results: Json | null
+          status: string | null
+          user_id: string | null
+          workflow_type: string
+        }
+        Insert: {
+          cost_usd?: number | null
+          created_at?: string | null
+          execution_time?: number | null
+          id?: string
+          input_data?: Json | null
+          results?: Json | null
+          status?: string | null
+          user_id?: string | null
+          workflow_type: string
+        }
+        Update: {
+          cost_usd?: number | null
+          created_at?: string | null
+          execution_time?: number | null
+          id?: string
+          input_data?: Json | null
+          results?: Json | null
+          status?: string | null
+          user_id?: string | null
+          workflow_type?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "executions_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      users: {
+        Row: {
+          brand_voice: Json | null
+          business_description: string | null
+          business_name: string | null
+          created_at: string | null
+          email: string
+          id: string
+          industry: string | null
+          monthly_usage: Json | null
+          plan_type: string | null
+          target_audience: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          brand_voice?: Json | null
+          business_description?: string | null
+          business_name?: string | null
+          created_at?: string | null
+          email: string
+          id?: string
+          industry?: string | null
+          monthly_usage?: Json | null
+          plan_type?: string | null
+          target_audience?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          brand_voice?: Json | null
+          business_description?: string | null
+          business_name?: string | null
+          created_at?: string | null
+          email?: string
+          id?: string
+          industry?: string | null
+          monthly_usage?: Json | null
+          plan_type?: string | null
+          target_audience?: string | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      waitlist: {
+        Row: {
+          budget_range: string | null
+          business_type: string | null
+          created_at: string | null
+          email: string
+          id: string
+          marketing_challenge: string | null
+          priority_features: string[] | null
+        }
+        Insert: {
+          budget_range?: string | null
+          business_type?: string | null
+          created_at?: string | null
+          email: string
+          id?: string
+          marketing_challenge?: string | null
+          priority_features?: string[] | null
+        }
+        Update: {
+          budget_range?: string | null
+          business_type?: string | null
+          created_at?: string | null
+          email?: string
+          id?: string
+          marketing_challenge?: string | null
+          priority_features?: string[] | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
