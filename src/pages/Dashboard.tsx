@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { LogOut, Bell, User } from "lucide-react";
+import SmartHeader from "@/components/SmartHeader";
 import ExecutiveSummaryCards from "@/components/dashboard/ExecutiveSummaryCards";
 import DashboardTabs from "@/components/dashboard/DashboardTabs";
 
@@ -87,44 +88,7 @@ const Dashboard = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Floating Header */}
-      <header className="floating-header">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <div className="flex items-center space-x-3">
-            <div className="w-8 h-8 bg-gradient-to-br from-primary to-secondary rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold">M</span>
-            </div>
-            <span className="text-xl font-bold text-heading">Marketing Intelligence Trinity</span>
-          </div>
-
-          <div className="flex items-center space-x-4">
-            <Button variant="ghost" size="sm" className="relative">
-              <Bell className="w-4 h-4" />
-              <span className="absolute -top-1 -right-1 w-2 h-2 bg-primary rounded-full"></span>
-            </Button>
-            
-            <div className="flex items-center space-x-3">
-              <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center">
-                <User className="w-4 h-4 text-primary" />
-              </div>
-              <div className="text-sm">
-                <p className="font-medium text-heading">{userProfile?.business_name || "User"}</p>
-                <p className="text-muted-foreground">{userProfile?.plan_type || "Starter"}</p>
-              </div>
-            </div>
-            
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={handleSignOut}
-              className="flex items-center"
-            >
-              <LogOut className="w-4 h-4 mr-2" />
-              Sign out
-            </Button>
-          </div>
-        </div>
-      </header>
+      <SmartHeader />
 
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-6 py-8">

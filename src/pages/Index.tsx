@@ -1,5 +1,6 @@
-import Header from "@/components/Header";
-import HeroSection from "@/components/HeroSection";
+import SmartHeader from "@/components/SmartHeader";
+import SmartHeroSection from "@/components/SmartHeroSection";
+import DemoModal from "@/components/DemoModal";
 import ProblemSolutionSection from "@/components/ProblemSolutionSection";
 import FeaturesSection from "@/components/FeaturesSection";
 import PricingSection from "@/components/PricingSection";
@@ -9,13 +10,17 @@ import { Button } from "@/components/ui/button";
 const Index = () => {
   return (
     <div className="min-h-screen bg-background">
-      <Header />
+      <SmartHeader />
       
       <main>
-        <HeroSection />
+        <SmartHeroSection />
         <ProblemSolutionSection />
-        <FeaturesSection />
-        <PricingSection />
+        <div id="features">
+          <FeaturesSection />
+        </div>
+        <div id="pricing">
+          <PricingSection />
+        </div>
       </main>
       
       {/* Footer */}
@@ -38,20 +43,82 @@ const Index = () => {
             <div>
               <h4 className="font-semibold mb-4">Product</h4>
               <ul className="space-y-2 text-gray-400">
-                <li><a href="#features" className="hover:text-white transition-colors">Features</a></li>
-                <li><a href="#pricing" className="hover:text-white transition-colors">Pricing</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Demo</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Case Studies</a></li>
+                <li>
+                  <button
+                    onClick={() => {
+                      const element = document.getElementById("features");
+                      element?.scrollIntoView({ behavior: "smooth" });
+                    }}
+                    className="hover:text-white transition-colors"
+                  >
+                    Features
+                  </button>
+                </li>
+                <li>
+                  <button
+                    onClick={() => {
+                      const element = document.getElementById("pricing");
+                      element?.scrollIntoView({ behavior: "smooth" });
+                    }}
+                    className="hover:text-white transition-colors"
+                  >
+                    Pricing
+                  </button>
+                </li>
+                <li>
+                  <DemoModal>
+                    <button className="hover:text-white transition-colors">Demo</button>
+                  </DemoModal>
+                </li>
+                <li>
+                  <button
+                    onClick={() => {
+                      // Show coming soon toast here if needed
+                      alert("Case Studies coming soon!");
+                    }}
+                    className="hover:text-white transition-colors"
+                  >
+                    Case Studies
+                  </button>
+                </li>
               </ul>
             </div>
             
             <div>
               <h4 className="font-semibold mb-4">Company</h4>
               <ul className="space-y-2 text-gray-400">
-                <li><a href="#" className="hover:text-white transition-colors">About</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Blog</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Careers</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Contact</a></li>
+                <li>
+                  <button
+                    onClick={() => alert("About page coming soon!")}
+                    className="hover:text-white transition-colors"
+                  >
+                    About
+                  </button>
+                </li>
+                <li>
+                  <button
+                    onClick={() => alert("Blog coming soon!")}
+                    className="hover:text-white transition-colors"
+                  >
+                    Blog
+                  </button>
+                </li>
+                <li>
+                  <button
+                    onClick={() => alert("Careers page coming soon!")}
+                    className="hover:text-white transition-colors"
+                  >
+                    Careers
+                  </button>
+                </li>
+                <li>
+                  <button
+                    onClick={() => alert("Contact page coming soon!")}
+                    className="hover:text-white transition-colors"
+                  >
+                    Contact
+                  </button>
+                </li>
               </ul>
             </div>
           </div>
