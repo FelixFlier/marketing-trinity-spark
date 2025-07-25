@@ -133,7 +133,12 @@ Premium unicorn startup design with vibrant purple & emerald green
 @layer components {
   /* Enhanced Glassmorphism Card */
   .glass-card {
-    @apply bg-white/70 backdrop-blur-xl border border-white/20 rounded-2xl shadow-2xl hover:shadow-3xl hover:bg-white/80 transition-all duration-300;
+    @apply bg-white/70 backdrop-blur-xl border border-white/20 rounded-2xl shadow-2xl hover:shadow-2xl hover:bg-white/80 transition-all duration-300;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  }
+  
+  .glass-card:hover {
+    box-shadow: 0 32px 64px -12px rgba(0, 0, 0, 0.35);
   }
   
   /* Premium Gradient Button */
