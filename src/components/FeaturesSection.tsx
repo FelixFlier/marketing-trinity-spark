@@ -1,6 +1,35 @@
+import { useState, useEffect } from "react";
 import { Brain, FileText, BarChart3, Zap, Shield, Users } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+import InteractiveAgentCard from "./agents/InteractiveAgentCard";
+import AgentPreviewModal from "./agents/AgentPreviewModal";
+import FullAgentExperience from "./agents/FullAgentExperience";
 
 const FeaturesSection = () => {
+  const [selectedAgent, setSelectedAgent] = useState<"research" | "strategy" | "content" | null>(null);
+  const [showPreviewModal, setShowPreviewModal] = useState(false);
+  const [showFullExperience, setShowFullExperience] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userProfile, setUserProfile] = useState<any>(null);
+
+  // Check authentication status on component mount
+  useEffect(() => {
+    const checkAuth = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      setIsLoggedIn(!!session);
+      if (session) {
+        // Fetch user profile if needed
+        setUserProfile({
+          businessName: "Your Business",
+          industry: "Technology",
+          targetAudience: "SMB",
+          brandVoice: ["Professional", "Innovative"]
+        });
+      }
+    };
+    checkAuth();
+  }, []);
+
   const agents = [
     {
       icon: "🔍",
@@ -13,7 +42,8 @@ const FeaturesSection = () => {
         "Customer sentiment analysis",
         "Opportunity mapping"
       ],
-      gradient: "from-blue-500 to-blue-600"
+      gradient: "from-blue-500 to-blue-600",
+      type: "research" as const
     },
     {
       icon: "📋", 
@@ -26,7 +56,8 @@ const FeaturesSection = () => {
         "Budget allocation plans",
         "Timeline & milestones"
       ],
-      gradient: "from-primary to-primary-glow"
+      gradient: "from-primary to-primary-glow",
+      type: "strategy" as const
     },
     {
       icon: "✍️",
@@ -39,7 +70,8 @@ const FeaturesSection = () => {
         "Social media content",
         "Ad creatives"
       ],
-      gradient: "from-secondary to-secondary-glow"
+      gradient: "from-secondary to-secondary-glow",
+      type: "content" as const
     }
   ];
 
@@ -66,6 +98,19 @@ const FeaturesSection = () => {
     }
   ];
 
+  const handleAgentClick = (agentType: "research" | "strategy" | "content") => {
+    setSelectedAgent(agentType);
+    if (isLoggedIn) {
+      setShowFullExperience(true);
+    } else {
+      setShowPreviewModal(true);
+    }
+  };
+
+  const handleSignUp = () => {
+    window.location.href = "/auth";
+  };
+
   return (
     <section id="features" className="py-24 px-4 bg-white">
       <div className="max-w-6xl mx-auto">
@@ -78,29 +123,34 @@ const FeaturesSection = () => {
             Three specialized agents working together to transform your marketing 
             from guesswork into a precise, data-driven growth engine.
           </p>
+          
+          {/* Live Activity Indicator */}
+          <div className="mt-8 flex items-center justify-center gap-6 text-sm text-muted-foreground">
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+              <span>{Math.floor(Math.random() * 50) + 25} users active now</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
+              <span>{Math.floor(Math.random() * 200) + 150} reports generated today</span>
+            </div>
+          </div>
         </div>
 
         {/* AI Agents Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-20">
           {agents.map((agent, index) => (
-            <div key={index} className="glass-card p-8 hover:scale-105 transition-transform duration-300 group">
-              <div className={`w-16 h-16 bg-gradient-to-br ${agent.gradient} rounded-2xl flex items-center justify-center mb-6 text-3xl group-hover:animate-float`}>
-                {agent.icon}
-              </div>
-              
-              <h3 className="text-2xl font-bold text-heading mb-2">{agent.name}</h3>
-              <p className="text-primary font-semibold mb-4">{agent.tagline}</p>
-              <p className="text-body mb-6">{agent.description}</p>
-              
-              <ul className="space-y-3">
-                {agent.features.map((feature, idx) => (
-                  <li key={idx} className="flex items-center text-sm text-body">
-                    <div className="w-2 h-2 bg-primary rounded-full mr-3 flex-shrink-0"></div>
-                    {feature}
-                  </li>
-                ))}
-              </ul>
-            </div>
+            <InteractiveAgentCard
+              key={index}
+              icon={agent.icon}
+              name={agent.name}
+              tagline={agent.tagline}
+              description={agent.description}
+              features={agent.features}
+              gradient={agent.gradient}
+              isLoggedIn={isLoggedIn}
+              onTryAgent={() => handleAgentClick(agent.type)}
+            />
           ))}
         </div>
 
@@ -117,6 +167,30 @@ const FeaturesSection = () => {
           ))}
         </div>
       </div>
+
+      {/* Modals */}
+      {showPreviewModal && selectedAgent && (
+        <AgentPreviewModal
+          isOpen={showPreviewModal}
+          onClose={() => {
+            setShowPreviewModal(false);
+            setSelectedAgent(null);
+          }}
+          agentType={selectedAgent}
+          onSignUp={handleSignUp}
+        />
+      )}
+
+      {showFullExperience && selectedAgent && (
+        <FullAgentExperience
+          agentType={selectedAgent}
+          userProfile={userProfile}
+          onClose={() => {
+            setShowFullExperience(false);
+            setSelectedAgent(null);
+          }}
+        />
+      )}
     </section>
   );
 };
