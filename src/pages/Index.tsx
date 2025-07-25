@@ -4,13 +4,16 @@ import DemoModal from "@/components/DemoModal";
 import ProblemSolutionSection from "@/components/ProblemSolutionSection";
 import FeaturesSection from "@/components/FeaturesSection";
 import PricingSection from "@/components/PricingSection";
-import WaitlistModal from "@/components/WaitlistModal";
+import RegistrationModal from "@/components/RegistrationModal";
+import BackgroundAnimation from "@/components/BackgroundAnimation";
 import { Button } from "@/components/ui/button";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-background">
-      <SmartHeader />
+    <div className="min-h-screen bg-background relative">
+      <BackgroundAnimation />
+      <div className="relative z-10">
+        <SmartHeader />
       
       <main>
         <SmartHeroSection />
@@ -128,15 +131,16 @@ const Index = () => {
               © 2024 Marketing Intelligence Trinity. All rights reserved.
             </p>
             <div className="flex items-center space-x-6 mt-4 md:mt-0">
-              <WaitlistModal>
+              <RegistrationModal>
                 <Button className="btn-gradient">
-                  Join Waitlist
+                  Register
                 </Button>
-              </WaitlistModal>
+              </RegistrationModal>
             </div>
           </div>
         </div>
       </footer>
+      </div>
     </div>
   );
 };

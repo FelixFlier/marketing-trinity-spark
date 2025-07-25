@@ -12,7 +12,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useToast } from "@/hooks/use-toast";
-import WaitlistModal from "./WaitlistModal";
+import RegistrationModal from "./RegistrationModal";
 
 const SmartHeader = () => {
   const navigate = useNavigate();
@@ -341,11 +341,11 @@ const SmartHeader = () => {
           >
             Sign In
           </Button>
-          <WaitlistModal>
+          <RegistrationModal>
             <Button className="btn-gradient shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
-              Join Waitlist
+              Register
             </Button>
-          </WaitlistModal>
+          </RegistrationModal>
         </div>
 
         {/* Mobile Menu Button */}
@@ -406,14 +406,14 @@ const SmartHeader = () => {
             >
               Sign In
             </Button>
-            <WaitlistModal>
+            <RegistrationModal>
               <Button 
                 className="w-full btn-gradient"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                Join Waitlist
+                Register
               </Button>
-            </WaitlistModal>
+            </RegistrationModal>
           </div>
         </div>
       )}

@@ -131,24 +131,48 @@ Premium unicorn startup design with vibrant purple & emerald green
 }
 
 @layer components {
-  /* Enhanced Glassmorphism Card */
+  /* Enhanced Premium Glassmorphism Card */
   .glass-card {
-    @apply bg-white/70 backdrop-blur-xl border border-white/20 rounded-2xl shadow-2xl hover:shadow-2xl hover:bg-white/80 transition-all duration-300;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    @apply bg-white/20 backdrop-blur-xl border border-white/30 rounded-2xl transition-all duration-300;
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.1));
+    box-shadow: 
+      0 8px 32px rgba(0, 0, 0, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2),
+      inset 0 -1px 0 rgba(255, 255, 255, 0.1);
   }
   
   .glass-card:hover {
-    box-shadow: 0 32px 64px -12px rgba(0, 0, 0, 0.35);
+    @apply transform scale-[1.02] translate-y-[-2px];
+    box-shadow: 
+      0 20px 40px rgba(0, 0, 0, 0.15),
+      inset 0 1px 0 rgba(255, 255, 255, 0.3),
+      inset 0 -1px 0 rgba(255, 255, 255, 0.1);
   }
   
   /* Premium Gradient Button */
   .btn-gradient {
-    @apply bg-gradient-to-r from-primary to-primary-glow text-white font-semibold rounded-xl px-6 py-3 shadow-lg hover:shadow-2xl hover:shadow-primary/25 transform hover:scale-105 hover:-translate-y-1 transition-all duration-300 border border-white/20;
+    @apply text-white font-semibold rounded-xl px-6 py-3 transition-all duration-300 border border-white/20;
+    background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--secondary)));
+    box-shadow: 
+      0 8px 24px rgba(139, 92, 246, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  }
+
+  .btn-gradient:hover {
+    @apply transform scale-105 translate-y-[-2px];
+    box-shadow: 
+      0 12px 32px rgba(139, 92, 246, 0.4),
+      0 0 20px rgba(139, 92, 246, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.3);
   }
   
   /* Premium Floating Header */
   .floating-header {
-    @apply fixed top-4 left-1/2 transform -translate-x-1/2 z-50 bg-white/80 backdrop-blur-xl rounded-full px-8 py-4 shadow-2xl border border-white/20 hover:bg-white/90 transition-all duration-300;
+    @apply fixed top-4 left-1/2 transform -translate-x-1/2 z-50 backdrop-blur-xl rounded-full px-8 py-4 border border-white/20 transition-all duration-300;
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.85));
+    box-shadow: 
+      0 10px 40px rgba(0, 0, 0, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.5);
   }
   
   /* Hero Background */
@@ -169,48 +193,103 @@ Premium unicorn startup design with vibrant purple & emerald green
     @apply text-muted-foreground/70;
   }
   
-  /* Animation Classes */
+  /* Premium Animation Classes */
   .animate-fade-in {
-    animation: fadeIn 0.6s ease-out;
+    animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   }
   
   .animate-slide-up {
-    animation: slideUp 0.6s ease-out;
+    animation: slideUp 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   }
   
   .animate-float {
-    animation: float 3s ease-in-out infinite;
+    animation: float 4s ease-in-out infinite;
+  }
+
+  .animate-glow {
+    animation: glow 2s ease-in-out infinite alternate;
+  }
+
+  /* Interactive Element Styles */
+  .interactive-card {
+    @apply transition-all duration-300 cursor-pointer;
+  }
+
+  .interactive-card:hover {
+    @apply transform scale-[1.02] translate-y-[-3px];
+  }
+
+  .hover-glow:hover {
+    filter: drop-shadow(0 0 20px rgba(139, 92, 246, 0.5));
+  }
+
+  /* Link Animation */
+  .animated-link {
+    @apply relative inline-block;
+  }
+
+  .animated-link::after {
+    @apply absolute bottom-0 left-0 w-full h-0.5 bg-primary scale-x-0 origin-right transition-transform duration-300;
+    content: '';
+  }
+
+  .animated-link:hover::after {
+    @apply scale-x-100 origin-left;
   }
 }
 
-/* Keyframes */
+/* Premium Keyframe Animations */
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(20px) scale(0.95);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
   }
 }
 
 @keyframes slideUp {
   from {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(40px) scale(0.95);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
   }
 }
 
 @keyframes float {
   0%, 100% {
-    transform: translateY(0px);
+    transform: translateY(0px) rotate(0deg);
   }
-  50% {
-    transform: translateY(-10px);
+  33% {
+    transform: translateY(-8px) rotate(1deg);
+  }
+  66% {
+    transform: translateY(-4px) rotate(-1deg);
+  }
+}
+
+@keyframes glow {
+  from {
+    filter: drop-shadow(0 0 20px rgba(139, 92, 246, 0.3));
+  }
+  to {
+    filter: drop-shadow(0 0 30px rgba(139, 92, 246, 0.6));
+  }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import WaitlistModal from "./WaitlistModal";
+import RegistrationModal from "./RegistrationModal";
 
 const Header = () => {
   return (
@@ -27,11 +27,11 @@ const Header = () => {
           >
             Sign In
           </Button>
-          <WaitlistModal>
+          <RegistrationModal>
             <Button className="btn-gradient">
-              Join Waitlist
+              Register
             </Button>
-          </WaitlistModal>
+          </RegistrationModal>
         </div>
       </div>
     </header>

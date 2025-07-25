@@ -17,7 +17,7 @@ const PricingSection = () => {
         "Email Support",
         "Industry Templates"
       ],
-      buttonText: "Join Waitlist",
+      buttonText: "Register",
       buttonVariant: "outline" as const,
       popular: false
     },
@@ -37,7 +37,7 @@ const PricingSection = () => {
         "A/B Testing Framework",
         "Competitor Monitoring"
       ],
-      buttonText: "Join Waitlist",
+      buttonText: "Register",
       buttonVariant: "default" as const,
       popular: true
     },
@@ -58,7 +58,7 @@ const PricingSection = () => {
         "Advanced Integrations",
         "Custom Reporting"
       ],
-      buttonText: "Join Waitlist",
+      buttonText: "Register",
       buttonVariant: "outline" as const,
       popular: false
     }

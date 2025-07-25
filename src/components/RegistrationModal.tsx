@@ -10,11 +10,11 @@ import { X, CheckCircle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 
-interface WaitlistModalProps {
+interface RegistrationModalProps {
   children: React.ReactNode;
 }
 
-const WaitlistModal = ({ children }: WaitlistModalProps) => {
+const RegistrationModal = ({ children }: RegistrationModalProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [formData, setFormData] = useState({
@@ -82,13 +82,13 @@ const WaitlistModal = ({ children }: WaitlistModalProps) => {
 
       setIsSubmitted(true);
       toast({
-        title: "Welcome to the waitlist!",
-        description: "We'll notify you when Marketing Intelligence Trinity launches.",
+        title: "Registration successful!",
+        description: "Welcome to Marketing Intelligence Trinity! You can now access all features.",
       });
     } catch (error: any) {
       toast({
         title: "Error",
-        description: error.message || "Failed to join waitlist. Please try again.",
+        description: error.message || "Failed to register. Please try again.",
         variant: "destructive",
       });
     }
@@ -121,7 +121,7 @@ const WaitlistModal = ({ children }: WaitlistModalProps) => {
                 <span>You're on the list!</span>
               </>
             ) : (
-              <span>Join the Marketing Intelligence Trinity Waitlist</span>
+              <span>Register for Marketing Intelligence Trinity</span>
             )}
           </DialogTitle>
         </DialogHeader>
@@ -131,10 +131,9 @@ const WaitlistModal = ({ children }: WaitlistModalProps) => {
             <div className="w-20 h-20 bg-gradient-to-br from-secondary to-secondary-glow rounded-full flex items-center justify-center mx-auto mb-6">
               <CheckCircle className="w-10 h-10 text-white" />
             </div>
-            <h3 className="text-xl font-semibold text-heading mb-4">Welcome to the Future of Marketing!</h3>
+            <h3 className="text-xl font-semibold text-heading mb-4">Welcome to Marketing Intelligence Trinity!</h3>
             <p className="text-body mb-6 max-w-md mx-auto">
-              You're among the first to experience AI-powered marketing intelligence. 
-              We'll send you exclusive updates and early access when we launch.
+              Your registration is complete! You now have access to all three AI agents and can start transforming your marketing strategy.
             </p>
             <Button onClick={resetForm} className="btn-gradient">
               Close
@@ -214,7 +213,7 @@ const WaitlistModal = ({ children }: WaitlistModalProps) => {
 
             <div className="flex space-x-3 pt-4">
               <Button type="submit" className="btn-gradient flex-1">
-                Join Waitlist
+                Register Now
               </Button>
               <Button type="button" variant="outline" onClick={() => setIsOpen(false)}>
                 Cancel
@@ -227,4 +226,4 @@ const WaitlistModal = ({ children }: WaitlistModalProps) => {
   );
 };
 
-export default WaitlistModal;
+export default RegistrationModal;
