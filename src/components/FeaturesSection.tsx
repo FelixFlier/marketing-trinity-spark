@@ -112,57 +112,66 @@ const FeaturesSection = () => {
   };
 
   return (
-    <section id="features" className="py-24 px-4 bg-white">
-      <div className="max-w-6xl mx-auto">
+    <section id="features" className="py-32 px-4 bg-white relative overflow-hidden">
+      <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-heading mb-6">
+        <div className="text-center mb-20">
+          <h2 className="text-heading-lg mb-8 animate-fade-in">
             Meet Your AI Marketing Trinity
           </h2>
-          <p className="text-xl text-body max-w-3xl mx-auto">
+          <p className="text-body-lg max-w-4xl mx-auto animate-slide-up">
             Three specialized agents working together to transform your marketing 
             from guesswork into a precise, data-driven growth engine.
           </p>
           
           {/* Live Activity Indicator */}
-          <div className="mt-8 flex items-center justify-center gap-6 text-sm text-muted-foreground">
-            <div className="flex items-center gap-2">
-              <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-              <span>{Math.floor(Math.random() * 50) + 25} users active now</span>
+          <div className="mt-12 flex items-center justify-center gap-8 text-sm text-muted-foreground">
+            <div className="flex items-center gap-3 glass-card px-4 py-2">
+              <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+              <span className="font-medium">{Math.floor(Math.random() * 50) + 25} users active now</span>
             </div>
-            <div className="flex items-center gap-2">
-              <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
-              <span>{Math.floor(Math.random() * 200) + 150} reports generated today</span>
+            <div className="flex items-center gap-3 glass-card px-4 py-2">
+              <div className="w-3 h-3 bg-blue-500 rounded-full animate-pulse"></div>
+              <span className="font-medium">{Math.floor(Math.random() * 200) + 150} reports generated today</span>
             </div>
           </div>
         </div>
 
         {/* AI Agents Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-20">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 mb-24">
           {agents.map((agent, index) => (
-            <InteractiveAgentCard
+            <div
               key={index}
-              icon={agent.icon}
-              name={agent.name}
-              tagline={agent.tagline}
-              description={agent.description}
-              features={agent.features}
-              gradient={agent.gradient}
-              isLoggedIn={isLoggedIn}
-              onTryAgent={() => handleAgentClick(agent.type)}
-            />
+              className="transform hover:scale-105 transition-all duration-500"
+              style={{ animationDelay: `${index * 0.2}s` }}
+            >
+              <InteractiveAgentCard
+                icon={agent.icon}
+                name={agent.name}
+                tagline={agent.tagline}
+                description={agent.description}
+                features={agent.features}
+                gradient={agent.gradient}
+                isLoggedIn={isLoggedIn}
+                onTryAgent={() => handleAgentClick(agent.type)}
+              />
+            </div>
           ))}
         </div>
 
         {/* Benefits Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {benefits.map((benefit, index) => (
-            <div key={index} className="text-center p-6 rounded-xl hover:bg-gray-50 transition-colors">
-              <div className="w-12 h-12 bg-gradient-to-br from-gray-100 to-gray-200 rounded-xl flex items-center justify-center mx-auto mb-4">
-                <benefit.icon className="w-6 h-6 text-primary" />
+            <div 
+              key={index} 
+              className="text-center p-8 rounded-2xl hover:bg-gray-50 transition-all duration-300 group cursor-pointer hover:scale-105 hover:-translate-y-2"
+              style={{ animationDelay: `${index * 0.1}s` }}
+            >
+              <div className="w-16 h-16 bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 group-hover:bg-gradient-to-br group-hover:from-primary/10 group-hover:to-secondary/10 transition-all duration-300">
+                <benefit.icon className="w-8 h-8 text-primary group-hover:scale-110 transition-transform duration-300" />
               </div>
-              <h4 className="text-lg font-semibold text-heading mb-2">{benefit.title}</h4>
-              <p className="text-body text-sm">{benefit.description}</p>
+              <h4 className="text-xl font-bold text-heading mb-3">{benefit.title}</h4>
+              <p className="text-body">{benefit.description}</p>
             </div>
           ))}
         </div>

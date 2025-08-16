@@ -245,13 +245,41 @@ Premium SaaS design with sophisticated color palette and typography
     color: hsl(var(--text-quaternary));
   }
   
+  /* Premium Interactive System */
+  .interactive-card {
+    @apply transition-all duration-500 cursor-pointer;
+  }
+
+  .interactive-card:hover {
+    @apply transform scale-[1.02] translate-y-[-4px];
+    box-shadow: var(--shadow-glass);
+  }
+
+  .hover-glow:hover {
+    filter: drop-shadow(0 0 24px hsla(262, 80%, 55%, 0.6));
+  }
+
+  /* Enhanced Link Animation */
+  .animated-link {
+    @apply relative inline-block;
+  }
+
+  .animated-link::after {
+    @apply absolute bottom-0 left-0 w-full h-0.5 bg-primary scale-x-0 origin-right transition-all duration-500;
+    content: '';
+  }
+
+  .animated-link:hover::after {
+    @apply scale-x-100 origin-left;
+  }
+
   /* Premium Animation Classes */
   .animate-fade-in {
-    animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: fadeIn 0.8s var(--timing-smooth);
   }
   
   .animate-slide-up {
-    animation: slideUp 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: slideUp 0.8s var(--timing-smooth);
   }
   
   .animate-float {
@@ -260,33 +288,6 @@ Premium SaaS design with sophisticated color palette and typography
 
   .animate-glow {
     animation: glow 2s ease-in-out infinite alternate;
-  }
-
-  /* Interactive Element Styles */
-  .interactive-card {
-    @apply transition-all duration-300 cursor-pointer;
-  }
-
-  .interactive-card:hover {
-    @apply transform scale-[1.02] translate-y-[-3px];
-  }
-
-  .hover-glow:hover {
-    filter: drop-shadow(0 0 20px rgba(139, 92, 246, 0.5));
-  }
-
-  /* Link Animation */
-  .animated-link {
-    @apply relative inline-block;
-  }
-
-  .animated-link::after {
-    @apply absolute bottom-0 left-0 w-full h-0.5 bg-primary scale-x-0 origin-right transition-transform duration-300;
-    content: '';
-  }
-
-  .animated-link:hover::after {
-    @apply scale-x-100 origin-left;
   }
 }
 
