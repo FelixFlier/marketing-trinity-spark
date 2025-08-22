@@ -186,12 +186,13 @@ Premium SaaS design with sophisticated color palette and typography
   
   /* Refined Floating Header */
   .floating-header {
-    @apply fixed top-6 left-1/2 transform -translate-x-1/2 z-50 backdrop-blur-2xl rounded-full px-10 py-5 transition-all duration-500;
+    @apply fixed top-6 left-1/2 transform -translate-x-1/2 backdrop-blur-2xl rounded-full px-10 py-5 transition-all duration-500;
     background: linear-gradient(145deg, hsla(0, 0%, 100%, 0.95), hsla(0, 0%, 100%, 0.8));
     border: 1px solid hsla(0, 0%, 100%, 0.3);
     box-shadow: 
       var(--shadow-xl),
       inset 0 1px 0 hsla(0, 0%, 100%, 0.8);
+    z-index: 1000; /* Ultra high z-index to prevent overlap */
   }
   
   .floating-header:hover {

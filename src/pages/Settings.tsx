@@ -112,7 +112,7 @@ const Settings = () => {
       <SmartHeader />
 
       {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-6 py-8 mt-20">
+      <div className="max-w-7xl mx-auto px-6 py-8 pt-32">
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Sidebar */}
           <div className="lg:w-64 flex-shrink-0">
